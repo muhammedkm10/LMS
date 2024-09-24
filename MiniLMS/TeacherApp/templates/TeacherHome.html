@@ -13,7 +13,12 @@
 
     <style>
         .bg-custom-background {
-                background-color: #D3D3D3;
+                min-height: 100vh;
+        }
+        @media (max-width: 768px) {
+            .bg-custom-background {
+                min-height: auto;
+            }
         }
        
       </style>
@@ -27,47 +32,48 @@
   </div>
   {% endif %}
   
-    <div class="container-fluid ">
-        <div class="row">
-            <div class="firstsection col-md-2 bg-custom-background p-2 text-black text-center">
-                   <h4 class="text-center pt-3">Teacher Dashboard</h4>
-                   <div class="inner_section p-2">
-                        <img src="{% static "images/profile.jpeg" %}" alt="" width="100px" height="100px">
-                        <h3 class="p-4">{{username}}</h3>
-                       
-                   </div>
-
+  <div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2 bg-primary text-white p-4 h-100vh bg-custom-background">
+            <h6 class="text-center mb-4">Teacher Dashboard</h6>
+            <div class="text-center mb-4">
+                <img src="{% static "images/profile.jpeg" %}" alt="" class="img-fluid rounded-circle mb-2" width="100" height="100">
+                <h5>{{ username }}</h5>
             </div>
-            <div class="secondsection container col-md-10  mt-5">
-                <div class="container  d-flex justify-content-between p-2">
-                    <h4>You'r Courses</h4>
-                <button  class="btn btn-success mr-0" data-bs-toggle="modal" data-bs-target="#addcourse">Add course</button>
-
-                </div>
-                {% for course in courses_queryset%}
-                <div class="card text-center p-2 m-2 ">
-                    <div class="card-body">
-                      <h5 class="card-title">{{course.name}}</h5>
-                      <p class="card-text">{{course.description}}</p>
-                      {% if course.quiz_added == True %}
-                      <a href="#" class="btn btn-secondary">show quiz</a>
-                      {%else%}
-                      <a href="#" class="btn btn-secondary">add quiz</a>
-                      {%endif%}
-
-                      <a href="#editcourse-{{forloop.counter}}" class="btn btn-info" data-bs-toggle="modal" >Edit</a>
-                      <a href="#delete-{{forloop.counter}}" class="btn btn-danger" data-bs-toggle="modal" >Delete </a>
-
+            
+        </div>
+        <div class="col-md-10 mt-5">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h4>Your Courses</h4>
+                <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addcourse">Add Course</button>
+            </div>
+            <div class="row">
+                {% for course in courses_queryset %}
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card h-100 ">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">{{ course.name }}</h5>
+                            <p class="card-text">{{ course.description }}</p>
+                            {% if course.quiz_added %}
+                            <div class="d-grid gap-2 mb-3">
+                                <a href="{% url "show_quiz" course.id %}" class="btn btn-secondary">Show Quiz</a>
+                                <a href="{% url "delete_quiz" course.id %}" class="btn btn-danger">Delete Quiz</a>
+                            </div>
+                            {% else %}
+                            <a href="{% url "add_quiz" course.code course.id %}" class="btn btn-success mb-3">Add Quiz</a>
+                            {% endif %}
+                            <div class="d-grid gap-2">
+                                <a href="#editcourse-{{ forloop.counter }}" class="btn btn-info" data-bs-toggle="modal">Edit Course</a>
+                                <a href="#delete-{{ forloop.counter }}" class="btn btn-danger" data-bs-toggle="modal">Delete Course</a>
+                            </div>
+                        </div>
                     </div>
-                  </div>
-                  {% endfor %}
-                  
-                  
                 </div>
-                
+                {% endfor %}
             </div>
         </div>
     </div>
+</div>
 
 
     {% comment %} add course modal {% endcomment %}

@@ -12,5 +12,18 @@ class Courses(models.Model):
     description  = models.TextField(null=True)
     quiz_added  = models.BooleanField(default=False)
     
+    
+    
+# model for the quiz
+
+class Quiz(models.Model):
+    course = models.ForeignKey(Courses, on_delete=models.CASCADE) 
+    question = models.TextField(null=True)
+    correct_answer = models.CharField(max_length=255,null=True)
+    incorrect_answers = models.JSONField(null=True)  
+
+    def __str__(self):
+        return self.question
+    
 
     
