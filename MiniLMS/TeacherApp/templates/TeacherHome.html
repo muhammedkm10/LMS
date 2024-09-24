@@ -55,8 +55,8 @@
                       <a href="#" class="btn btn-secondary">add quiz</a>
                       {%endif%}
 
-                      <button  class="btn btn-info" data-bs-toggle="modal" data-bs-target="#editcourse{{ course.id }}">Edit</button>
-                      <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deletcourse{{ course.id }}" >Delete </button>
+                      <a href="#editcourse-{{forloop.counter}}" class="btn btn-info" data-bs-toggle="modal" >Edit</a>
+                      <a href="#delete-{{forloop.counter}}" class="btn btn-danger" data-bs-toggle="modal" >Delete </a>
 
                     </div>
                   </div>
@@ -71,7 +71,7 @@
 
 
     {% comment %} add course modal {% endcomment %}
-    <div class="modal fade" id="addcourse" tabindex="-1" aria-labelledby="addcourse" aria-hidden="true">
+       <div class="modal fade" id="addcourse" tabindex="-1" aria-labelledby="addcourse" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
@@ -96,20 +96,23 @@
                         <label for="courseDescription" class="form-label">Course Description:</label>
                         <textarea class="form-control" id="courseDescription" name="description" rows="3" required></textarea>
                     </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-primary">Save changes</button>
-            </div>
-        </form>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+               </form>
 
           </div>
         </div>
       </div>
 
+      </div>
+
 
 
       {% comment %} edit modal {% endcomment %}
-      <div class="modal fade" id="editcourse{{ course.id }}" tabindex="-1" aria-labelledby="editcourse{{course.id}}" aria-hidden="true">
+      {% for course in courses_queryset%}
+      <div class="modal fade" id="editcourse-{{forloop.counter}}" >
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
@@ -117,16 +120,15 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form method="post" action="">
-                    <h1>{{course.id}}</h1>
+                <form method="post" action="{% url 'edit_course' course.id %}">
                     {% csrf_token %}
                     <div class="mb-3">
                       <label for="courseName" class="form-label">Course Name:</label>
-                      {% comment %} <input type="text" class="form-control" id="courseName" name="course_name" value="{{ course.name }}"> {% endcomment %}
+                       <input type="text" class="form-control" id="courseName" name="name" value="{{ course.name }}" disabled>
                     </div>
                     <div class="mb-3">
                       <label for="courseDescription" class="form-label">Course Description:</label>
-                      {% comment %} <textarea class="form-control" id="courseDescription" name="course_description" rows="3">{{ course.description}}</textarea> {% endcomment %}
+                       <textarea class="form-control" id="courseDescription" name="description" rows="3">{{ course.description}}</textarea>
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -135,8 +137,36 @@
                   </form>
 
           </div>
+            </div>
+      </div>
+    </div>
+    {%endfor%}
+
+
+    {% comment %} delete modal {% endcomment %}
+    {%for course in courses_queryset%}
+    <div class="modal fade" id="delete-{{forloop.counter}}" >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="deleteConfirmationLabel">Confirm Deletion</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <p>Are you sure you want to delete the course "{{ course.name }}"?</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+              <a href="{% url "delete_course" course.id %}" type="button" class="btn btn-danger" id="confirm-delete-btn">Delete</a>
+            </div>
+          </div>
         </div>
       </div>
+      {% endfor %}
+      
+
+
+      
     
 </body>
 </html>

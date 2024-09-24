@@ -27,4 +27,19 @@ class AddCouseForm(forms.Form):
         return description
     
     
+    # edit course form
+class EditCouseForm(forms.Form):
+    
+    # taking data
+    description   = forms.CharField(widget=forms.Textarea, max_length=500)
+    
+    # descriptioin validation
+    def clean_description(self):
+        description = self.cleaned_data['description']
+        if description == "" or len(description) < 10:
+            print(description)
+            raise forms.ValidationError("description should be valid")
+        return description
+    
+    
 

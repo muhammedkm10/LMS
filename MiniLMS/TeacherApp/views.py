@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from AuthApp.decorator import check_session_key,check_student_session,check_teacher_session
 from django.views.decorators.cache import never_cache
 from AuthApp.models import CustomUser
-from .forms import AddCouseForm
+from .forms import AddCouseForm,EditCouseForm
 from django.contrib import messages
 from .models import Courses
 
@@ -58,7 +58,7 @@ def AddCourse(request):
 def EditCourse(request,id):
     print(id)
     if request.method == "POST":
-        form = AddCouseForm(data=request.POST)
+        form = EditCouseForm(data=request.POST)
         email = request.session["email"]
         current_user = CustomUser.objects.get(email = email)
         choices = {
@@ -69,14 +69,23 @@ def EditCourse(request,id):
             "27":"Animals"
         }
         if form.is_valid():
-            name = form.cleaned_data['name']
             description = form.cleaned_data['description']
-            Courses.objects.create(teacher = current_user,name=choices[name],code=name,description=description) 
-            messages.success(request,'Your course added succesfully..')
+            Courses.objects.filter(id=id).update(teacher = current_user,description=description) 
+            messages.success(request,'Your course updated succesfully..')
             return redirect("teacher_home")
         else:
             print(form.errors)
             messages.error(request,"Select name or The  description should contain 10 letters")
             return redirect("teacher_home")
     
+    
+# Delete course
+def DeleteCourse(request,id):
+      Courses.objects.get(id = id).delete()
+      messages.success(request,'Your course deleted succesfully..')
+      return redirect("teacher_home")
+      
+        
+    
+
 
