@@ -1,0 +1,54 @@
+<!-- home.html -->
+{% extends 'AuthBaseTeacher.html' %} {% block title %} Signup {% endblock %} 
+{% block content %}
+<div class="w-75">
+  <h2 class="mb-4">Teachers Sign up</h2>
+  {% if messages %}
+  <div class="alert alert-danger mt-3">
+  {% for message in messages %}
+  {{ message }}
+  {% endfor %}
+  </div>
+  {% endif %}
+  <form method="POST" action='signup'>
+    {% csrf_token %}
+    <input type="hidden" name="role" value="teacher">
+    <div class="mb-3">
+      <label for="username" class="form-label">Teacher name*</label>
+      <input type="username" name="username"class="form-control" id="username" required />
+    </div>
+    <div class="mb-3">
+      <label for="email" class="form-label">Email address*</label>
+      <input type="email" name="email"class="form-control" id="email" required />
+    </div>
+    
+    <div class="mb-3">
+        <label for="qualification" class="form-label">Qualification(optional)</label>
+        <select  name="qualification" class="form-select" required>
+          <option value="">Select an option</option>
+          <option value="Higher secondary education">Higher secondary education</option>
+          <option value="Graduation">Graduation</option>
+          <option value="Post Graduation">Post Graduation</option>
+          <option value="Phd">Phd</option>
+          <option value="others">others</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="password1" class="form-label">Password*</label>
+        <input type="password" name="password1" class="form-control" id="password1" required />
+      </div>
+    <div class="mb-3">
+      <label for="password2" class="form-label">Confirm Password*</label>
+      <input type="password"  name="password2" class="form-control" id="password2" required />
+    </div>
+   
+    <button type="submit" class="btn btn-primary w-100">Sign Up</button>
+  </form>
+ 
+  <div class="mt-3 text-center">
+    <span>Do you have an account? </span>
+    <a href={% url "login"%}?role=teacher class="text-decoration-none">Sign In</a>
+  </div>
+</div>
+
+{% endblock %}
