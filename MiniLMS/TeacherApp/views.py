@@ -6,6 +6,7 @@ from .forms import AddCouseForm,EditCouseForm
 from django.contrib import messages
 from .models import Courses,Quiz
 import requests
+from StudentApp.models import QuizSubmissionDetails
 
 
 
@@ -122,10 +123,14 @@ def AddQuiz(request,code,course_id):
 def ShowQuiz(request,course_id):
     course = get_object_or_404(Courses, id=course_id)  # Fetch the specific course
     quizzes = Quiz.objects.filter(course=course)  # Get all quizzes for this course
+    submissions = QuizSubmissionDetails.objects.filter(course = course).select_related("student")
+    print(submissions)
+    
     
     context = {
         'course': course,
         'quizzes': quizzes,
+        "submissions":submissions
     }
     return render(request,"ShowQuizToTeacher.html",context)
 

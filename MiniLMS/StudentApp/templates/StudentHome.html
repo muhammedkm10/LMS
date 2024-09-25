@@ -47,7 +47,11 @@
             <div class="col-md-6 d-flex flex-column font-monospace align-items-center text-center">
                     <h4>Welcome to M-Learnig</h4>
                     <p> <strong>M-Learning</strong>  enables learners to access courses and quizzes via their mobile devices, offering flexibility and convenience. It features interactive content that enhances engagement and understanding. Each course is supplemented with quizzes to reinforce knowledge and track progress. This approach makes education accessible anytime, anywhere, catering to diverse learning styles.</p>
-                    <a class="btn btn-info text-white"href="#course_section">Our Courses</a>
+                    <div class="d-flex">
+                    <a class="btn btn-info text-white mx-2" href="#course_section">Our Courses</a>
+                    <a class="btn btn-success text-white" href="#attended">You Quizes</a>
+                </div>
+
             </div>
         </div>
     </header>
@@ -75,8 +79,29 @@
         </div>
     </main>
 
-    <footer class="bg-dark text-white text-center py-3">
-        <p>&copy; 2024 LearnSmart. All rights reserved.</p>
+    <main class="container my-5 p-5 mt-5  bg-white" id="attended">
+        <h2 class="text-center mb-4 font-monospace p-3 ">Attended Quizes</h2>
+        <div class="row">
+            {% for sub in submissions%}
+
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 text-center">
+                    <div class="card-body">
+                        <Strong class="card-title fs-5 py-3">{{sub.course.name}}</Strong>
+                        <h5 class="card-title  ">{{sub.course.teacher.username}}</h5>
+                        <p class="card-text pt-3">Date : {{sub.date}} </p>
+                        <p class="card-text pt-3">Your Score : {{sub.score}} </p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %} 
+
+            
+        </div>
+    </main>
+
+    <footer class="navbar text-white text-center py-3">
+        <h6 class="text-center m-auto">&copy; 2024 LearnSmart. All rights reserved.</h6>
     </footer>
 
     <!-- Logout Modal -->

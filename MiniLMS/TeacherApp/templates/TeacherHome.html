@@ -10,6 +10,8 @@
       rel="stylesheet"
     />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
 
     <style>
         .bg-custom-background {
@@ -51,34 +53,37 @@
             
         </div>
         <div class="col-md-10 mt-5">
-            <div class="d-flex justify-content-between align-items-center mb-4">
+            <div class="d-flex justify-content-between align-items-center mb-4 bg-body-tertiary p-3">
                 <h4>Your Courses</h4>
                 <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addcourse">Add Course</button>
             </div>
             <div class="row">
-                {% for course in courses_queryset %}
-                <div class="col-md-6 col-lg-4 mb-4">
-                    <div class="card h-100 p-2 border-2">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">{{ course.name }}</h5>
-                            <p class="card-text">{{ course.description }}</p>
+              {% for course in courses_queryset %}
+              <div class="col-md-6 col-lg-4 mb-4">
+                  <div class="card shadow-sm border-0 bg-body-tertiary rounded-lg overflow-hidden position-relative">
+                      <div class=" p-2 position-relative">
+                          <a href="#editcourse-{{ forloop.counter }}" class="btn  btn-sm position-absolute top-0 end-0 m-2" title="edit"data-bs-toggle="modal">
+                              <i class="fas fa-pencil-alt"></i>
+                          </a>
+                      </div>
+                      <div class="card-body p-5">
+                          <h5 class="card-title text-center">{{ course.name }}</h5>
+                          <p class="card-text text-muted text-center mt-3">{{ course.description }}</p>
+          
+                         
+                          <div class="d-flex justify-content-center mt-3">
                             {% if course.quiz_added %}
-                            <div class="d-grid gap-2 mb-3">
-                                <a href="{% url "show_quiz" course.id %}" class="btn btn-secondary">Show Quiz</a>
-                                <a href="{% url "delete_quiz" course.id %}" class="btn btn-danger">Delete Quiz</a>
-                            </div>
+                            <a href="{% url "list_quiz" course.id %}" class="btn btn-secondary btn-block me-2">View Quizzes</a>
                             {% else %}
-                            <a href="{% url "add_quiz" course.code course.id %}" class="btn btn-success mb-3">Add Quiz</a>
+                                <a href="{% url "add_quiz" course.code course.id %}" class="btn btn-success btn-block me-2">Add Quiz</a>
                             {% endif %}
-                            <div class="d-grid gap-2">
-                                <a href="#editcourse-{{ forloop.counter }}" class="btn btn-info" data-bs-toggle="modal">Edit Course</a>
-                                <a href="#delete-{{ forloop.counter }}" class="btn btn-danger" data-bs-toggle="modal">Delete Course</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
+                              <a href="#delete-{{ forloop.counter }}" class="btn btn-danger btn-sm" data-bs-toggle="modal">Delete</a>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              {% endfor %}
+          </div>
         </div>
     </div>
 </div>

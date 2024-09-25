@@ -2,9 +2,11 @@ from django.shortcuts import render,redirect
 from AuthApp.decorator import check_session_key,check_student_session,check_teacher_session
 from django.views.decorators.cache import never_cache
 from TeacherApp.models import Courses,Quiz
+from .models import QuizSubmissionDetails
 from django.http import JsonResponse
 import random
-
+from AuthApp.models import CustomUser
+from django.utils import timezone
 
 # student home
 @check_session_key('email')
@@ -14,8 +16,17 @@ def StudentHome(request):
     # if user went back to the home from the quiz clearing the session
     request.session.pop('quiz_answers', None) 
     courses_with_teachers = Courses.objects.select_related('teacher').all()
+    email = request.session['email']
+    user = CustomUser.objects.get(email = email)
+    
+    # Retrieve all submission details for the user
+    
+    submissions = QuizSubmissionDetails.objects.filter(student=user).select_related('course')
+    
     context = {
-        "courses_with_teachers":courses_with_teachers
+        "courses_with_teachers":courses_with_teachers,
+        "submissions":submissions
+        
     }
     return render(request,"StudentHome.html",context)
 
@@ -57,6 +68,12 @@ def ShowQuiz(request,course_id):
             
             # Prepare context for results page
             total_questions = len(questions)
+            email = request.session['email']
+            user = CustomUser.objects.get(email = email)
+            current_date = timezone.now() 
+            print(current_date)
+            QuizSubmissionDetails.objects.create(student = user,course = course,score = score,date = current_date)
+            
             return render(request, 'QuizResult.html', {
                 'score': score,
                 'total_questions': total_questions,

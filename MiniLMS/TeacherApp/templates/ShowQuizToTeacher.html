@@ -34,9 +34,37 @@
             {% endif %}
 
         <div class="mt-4 text-center">
-            <a href="{% url "teacher_home" %}" class="btn btn-primary ">Back to Course</a>
+            <a href="{% url "teacher_home" %}" class="btn btn-primary  ">Back to Course</a>
+            <a href="{% url "delete_quiz" course.id %}" class="btn btn-danger ">Delete Quiz</a>
+
+
         </div>
     </div>
+    <main class="container my-5 p-5 mt-5  bg-white" id="attended">
+        <h2 class="text-center mb-4 font-monospace p-3 ">Attended Students Details</h2>
+        
+        <div class="row">
+            {% if submissions %}
+                {% for sub in submissions %}
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100 text-center">
+                            <div class="card-body">
+                                <h5 class="card-title">Student name: {{ sub.student.username }}</h5>
+                                <p class="card-text pt-3">Date: {{ sub.date }}</p>
+                                <p class="card-text pt-3">Scored mark: {{ sub.score }}</p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="col-md-12">
+                    <div class="alert alert-info text-center">
+                        <strong>No students attended.</strong>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </main>
 
 </body>
 </html>
