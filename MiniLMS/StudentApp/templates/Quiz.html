@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+    body {
+        font-family: 'Arial', sans-serif;
+        
+    }
+    .navbar {
+        background-color: #4b0082;
+    }
+    .btn-primary {
+        background-color: #4b0082;
+        border-color: #4b0082;
+    }
+    .btn-primary:hover {
+        background-color: #6a5acd;
+        border-color: #6a5acd;
+    }
+    .full_container{
+        height: 100vh;
+    }
+</style>
+</head>
+<body >
+    <div class="container-fluid  h-100vh full_container p-0 d-flex flex-column justify-content-between">
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">M-Leaning</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto p-2">
+                    <li class="nav-item" ><a href="/student_home" class="nav-link btn  ms-2 text-white">Back to home</a></li>
+                    <li class="nav-item"><a class="nav-link btn bg-danger ms-2 text-white"  data-bs-toggle="modal" data-bs-target="#logout">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    {%if questions  == "no_quiz"%}
+    <div class="container-fluid ">
+        <h4 class="text-center font-monospace ">Oops ...No quiz for this course</h1>
+    </div>
+    {%else%}
+    <h4 class="text-center font-monospace">Quiz for {{course.name}}</h4>
+    <div class="container  py-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <form id="quizForm" method="post">
+                            {% csrf_token %}
+                            <p class="text-muted mb-4">Question {{ question_index|add:1 }} of {{ total_questions }}</p>
+                            
+                            <div class="mb-4">
+                                <p class="h6  text-center"><strong>{{ current_question.question }}</strong></p>
+                                {% for answer in answer_options %}
+                                    <div class="form-check mb-2 ">
+                                        <input class="form-check-input " type="radio" name="answer" id="answer{{ forloop.counter }}" value="{{ answer }}" >
+                                        <label class="form-check-label" for="answer{{ forloop.counter }}">
+                                            {{ answer }}
+                                        </label>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <div class="container text-center">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {%endif%}  
+
+    <footer class="bg-dark text-white text-center py-3">
+        <p>&copy; 2024 LearnSmart. All rights reserved.</p>
+    </footer>
+</div>
+    
+
+     
+</body>
+<!-- Logout Modal -->
+<div class="modal fade" id="logout" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="logoutModalLabel">Confirm Logout</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to logout?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <a  href="{% url "logout" %}" type="button" class="btn btn-danger" id="confirm-delete-btn">Logout</a>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+<script>
+    document.getElementById('quizForm').onsubmit = function(event) {
+        event.preventDefault();  
+        const selectedAnswer = document.querySelector('input[name="answer"]:checked');
+
+        if (selectedAnswer) {
+            const formData = new FormData();
+            formData.append('answer', selectedAnswer.value);
+
+            fetch(window.location.href, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-CSRFToken': '{{ csrf_token }}'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    const url = new URL(window.location.href);
+                    const params = new URLSearchParams(url.search);
+                    
+         // Get the current question index and increment it
+                    let currentIndex = parseInt(params.get('question_index') || '0');
+                    currentIndex++;
+                    
+             // Update or add the question_index parameter
+                    params.set('question_index', currentIndex);
+                    
+            // Keep the course_id if it exists
+                    const courseId = params.get('course_id');
+                    if (courseId) {
+                        params.set('course_id', courseId);
+                    }
+                    
+            // Construct the new URL
+                    url.search = params.toString();
+                    
+         // Redirect to the next question
+                    window.location.href = url.toString();
+                }
+            });
+        } else {
+            alert('Please select an answer before proceeding!');
+        }
+    };
+</script>
+
+
+</html>

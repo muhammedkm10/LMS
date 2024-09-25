@@ -39,7 +39,15 @@
             <div class="text-center mb-4">
                 <img src="{% static "images/profile.jpeg" %}" alt="" class="img-fluid rounded-circle mb-2" width="100" height="100">
                 <h5>{{ username }}</h5>
+
             </div>
+            <div class="container  text-center">
+               <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#logout">Logout</button>
+                  
+            </div>
+
+            
+            
             
         </div>
         <div class="col-md-10 mt-5">
@@ -50,7 +58,7 @@
             <div class="row">
                 {% for course in courses_queryset %}
                 <div class="col-md-6 col-lg-4 mb-4">
-                    <div class="card h-100 ">
+                    <div class="card h-100 p-2 border-2">
                         <div class="card-body text-center">
                             <h5 class="card-title">{{ course.name }}</h5>
                             <p class="card-text">{{ course.description }}</p>
@@ -169,6 +177,26 @@
         </div>
       </div>
       {% endfor %}
+
+
+
+      <div class="modal fade" id="logout" >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="deleteConfirmationLabel">Confirm Logout</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <p>Do you want to logout?</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+              <a  href="{% url "logout" %}" type="button" class="btn btn-danger" id="confirm-delete-btn">Logout</a>
+            </div>
+          </div>
+        </div>
+      </div>
       
 
 

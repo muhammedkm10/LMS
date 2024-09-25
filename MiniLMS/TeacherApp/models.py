@@ -20,10 +20,12 @@ class Quiz(models.Model):
     course = models.ForeignKey(Courses, on_delete=models.CASCADE) 
     question = models.TextField(null=True)
     correct_answer = models.CharField(max_length=255,null=True)
-    incorrect_answers = models.JSONField(null=True)  
+    incorrect_answers = models.JSONField(null=True) 
+    question_index = models.IntegerField(default=0) 
 
     def __str__(self):
         return self.question
+    
     
 
     

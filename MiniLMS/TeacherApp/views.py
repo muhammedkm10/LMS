@@ -97,16 +97,19 @@ def AddQuiz(request,code,course_id):
     if response.status_code == 200:
         api_response = response.json()
         course = Courses.objects.get(id=course_id)  # Fetch the course object
-
+        count = 1
         for item in api_response['results']:
             Quiz.objects.create(
                 course=course,
                 question=item['question'],
                 correct_answer=item['correct_answer'],
-                incorrect_answers=item['incorrect_answers']  # This will be stored as a list in JSONField
+                incorrect_answers=item['incorrect_answers'],
+                question_index = count
             )
+            count = count+1
         course.quiz_added = True
         course.save()
+        
         messages.success(request,'Quiz added for the course succesfully...')
         return redirect("teacher_home") 
     else:
@@ -125,6 +128,7 @@ def ShowQuiz(request,course_id):
         'quizzes': quizzes,
     }
     return render(request,"ShowQuizToTeacher.html",context)
+
 
 # delete quiz
 def DeleteQuiz(request,course_id):
