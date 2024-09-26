@@ -1,0 +1,27 @@
+body,
+html {
+  height: 100%;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow:hidden;
+}
+.login-container {
+  min-height: 80vh;
+}
+.image-collage {
+  width: 100%;
+  height: 68vh;
+}
+.form-control::placeholder { 
+  opacity: 1; 
+  text-align: center;
+}
+.bg-navbar {
+background-color: #330551;
+}
+.hover-custome:hover{
+background-color: blueviolet;
+}
+.auth-section{
+ min-width: 400px;
+}

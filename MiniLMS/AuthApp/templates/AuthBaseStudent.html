@@ -10,35 +10,7 @@
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
-    <style>
-      body,
-      html {
-        height: 100%;
-        margin: 0 !important;
-        padding: 0 !important;
-        overflow:hidden;
-      }
-      .login-container {
-        min-height: 80vh;
-      }
-      .image-collage {
-        width: 100%;
-        height: 68vh;
-      }
-      .form-control::placeholder { 
-        opacity: 1; 
-        text-align: center;
-    }
-    .bg-navbar {
-      background-color: #330551;
-   }
-   .hover-custome:hover{
-      background-color: blueviolet;
-   }
-   .auth-section{
-       min-width: 400px;
-   }
-    </style>
+    <link rel="stylesheet" href="{%staic "css/authstudentbase.css"%}">
   </head>
   <body>
     <div class="container-fluid p-0 m-0"  style="width: 100vw;" >
@@ -50,7 +22,7 @@
           </div>
           <div class="text-center">
             <img
-              src={% static 'images/man with lap.png' %}
+              src={% static 'images/man-with-lap.png' %}
               alt="Image Collage"
               class="img-fluid rounded image-collage"
             />

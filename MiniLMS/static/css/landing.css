@@ -1,0 +1,83 @@
+body {
+  overflow-x: hidden;
+  background: linear-gradient(to left, rgb(177, 500, 500), white);
+}
+
+.headeer-font {
+  font-family: "Archivo Black", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 50px;
+  color: #330551;
+}
+.button-custom {
+  color: white;
+  background-color: #330551;
+  border-radius: 2;
+  padding: 10px 20px;
+}
+.button-custom1:hover,
+.button-custom:hover {
+  background-color: blueviolet !important;
+  color: white;
+}
+
+@media (max-width: 1000px) {
+  .header-container {
+    background-image: none !important;
+  }
+}
+.about-us {
+  max-width: 300px;
+}
+.pt-sans-bold {
+  font-family: "PT Sans", sans-serif;
+  font-weight: 800;
+  font-style: normal;
+  font-size: 25px;
+}
+.custom-bg {
+  background-color: #f4f4f4;
+}
+.simple_font {
+  font-family: "PT Sans", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 18px;
+}
+.carousel-item {
+  text-align: center;
+}
+.carousel-item {
+  text-align: center;
+}
+.carousel-img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin: 15px auto;
+}
+.carousel-card {
+  border-radius: 20px;
+  padding: 20px;
+  background-color: white;
+}
+.service-card {
+  transition: all 0.3s ease;
+  border: none;
+  padding: 15px;
+}
+.service-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  background-color: rgb(10, 70, 70);
+  color: wheat;
+}
+.service-icon {
+  font-size: 2.5rem;
+  color: #007bff;
+}
+.custom-hover-link:hover {
+  color: wheat !important;
+}

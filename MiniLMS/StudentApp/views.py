@@ -111,6 +111,9 @@ def calculate_score(answers, questions):
 
 
 # student profile fuction
+@check_session_key("email")
+@check_student_session
+@never_cache
 def StudentProfile(request):
     email = request.session["email"]
     user = CustomUser.objects.get(email=email)
@@ -123,6 +126,9 @@ def StudentProfile(request):
     
 
 # show courses for users
+@check_session_key("email")
+@check_student_session
+@never_cache
 def CourseDetails(request):
     courses_with_teachers = Courses.objects.select_related("teacher").all().order_by("-id")
     context = {

@@ -21,143 +21,6 @@
 
     <style>
 
-        {% comment %} common styles {% endcomment %}
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f4f4f4; 
-        }
-        .navbar {
-           background-color: #330551;
-        }
-        .btn-primary {
-            background-color: #4b0082;
-            border-color: #4b0082;
-        }
-        .btn-primary:hover {
-            background-color: #6a5acd;
-            border-color: #6a5acd;
-        }
-        .navbar-text{
-            color: rgb(11, 118, 133);
-        }
-        .hover-effect:hover{
-           color:blueviolet !important;
-        }
-        {% comment %} home page styles {% endcomment %}
-
-
-
-        {% comment %} header part {% endcomment %}
-        .custom_button:hover{
-            background-color: blueviolet;
-            color: white !important;
-        }
-        .custom_button{
-            padding: 10px 20px;
-            color: white;
-        }
-        @media (max-width: 1000px) {
-            .header-container {
-                background-image: none !important;
-            }
-            .header_inner{
-                padding-top: 20px;
-            }
-        }
-        .headeer-font{
-                font-family: "Archivo Black", sans-serif;
-                font-weight: 400;
-                font-style: normal;
-                font-size: 50px;
-              }
-        .header_inner{
-            max-width: 40vw;
-            min-width: 300px;
-        }
-        .slide-in {
-            animation: slideIn 1.5s forwards; /* Apply animation */
-        }
-        
-        @keyframes slideIn {
-            from {
-                opacity: 0; 
-                transform: translateX(100%); 
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-
-        }
-        .header-para{
-        min-width:300px
-        }
-
-
-        {% comment %} why us and about section {% endcomment %}
-        .about-section{
-            max-width: 50vw;
-            min-width: 300px;
-        }
-        .pt-sans-bold {
-            font-family: "PT Sans", sans-serif;
-            font-weight: 800;
-            font-style: normal;
-            font-size: 25px;
-          }
-          .para-font{
-            font-size: 13px;
-          }
-          .simple_font{
-            font-family: "PT Sans", sans-serif;
-            font-weight: 500;
-            font-style: normal;
-            font-size: 18px;
-
-          }
-          .why_us {
-            background-color: rgba(85, 96, 219, 0.1); 
-            backdrop-filter: blur(100px);
-        }
-        
-      
-        {% comment %} footer {% endcomment %}
-
-        .footer_background{
-            background-color: #330551;
-            color: white;
-            text-decoration: none; 
-        }
-            
-
-        .filter-button{
-            border:1px solid gray;
-            border-radius: 20px;
-        }
-        .filter-button:hover{
-             background-color: black;
-             color: white;
-        }
-        .why_us{
-            margin-top: -100px !important;
-        }
-
-{% comment %} scroll bar removel {% endcomment %}
-        #attended::-webkit-scrollbar {
-            display: none;
-        }
-
-        .custom_background{
-            background-color: #f4f4f4; 
-
-        }
-        .about-section{
-            min-width: 250px;
-        }
-        .custom-card{
-            min-width: 300px;
-        }
-        
         
 
         
@@ -202,10 +65,9 @@
                     <div>
                         <h3 class="h5 mb-3 text-decoration-underline">Quick Links</h3>
                         <ul class="list-unstyled mb-4">
-                            <li><a href="#" class="mb-2 d-inline-block text-decoration-none text-white">Home</a></li>
-                            <li><a href="#" class="mb-2 d-inline-block text-decoration-none text-white">Courses</a></li>
-                            <li><a href="#" class="mb-2 d-inline-block text-decoration-none text-white">About Us</a></li>
-                            <li><a href="#" class="mb-2 d-inline-block text-decoration-none text-white">Profile</a></li>
+                            <li><a href="/student_home" class="mb-2 d-inline-block text-decoration-none text-white">Home</a></li>
+                            <li><a href="/show_courses" class="mb-2 d-inline-block text-decoration-none text-white">Courses</a></li>
+                            <li><a href="/student_profile" class="mb-2 d-inline-block text-decoration-none text-white">Profile</a></li>
                         </ul>
                         
                     </div>

@@ -10,6 +10,7 @@
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
+    
     <style>
       body,
       html {
@@ -27,31 +28,23 @@
       }
     </style>
   </head>
-  <body>
-    <div class="container-fluid">
-      <div class="row login-container">
-        {% comment %} <div
-          class="col-md-6 bg-custom-blue d-flex flex-column justify-content-between align-items-center text-white p-5"
-        >
-          <div class="text-start w-100">
-            <h3>M-Learning</h3>
-          </div>
-          <div class="text-center">
-            <img
-              src={% static 'images/login.jpeg' %}
-              alt="Image Collage"
-              class="img-fluid rounded image-collage"
-            />
-          </div>
-          <div class="w-100 d-flex justify-content-center">
-           
-          </div>
-        </div> {% endcomment %}
+  <body >
+    <div class="container-fluid p-0">
+    <nav class="navbar bg-custom-blue navbar-expand-lg navbar-dark bg-muted  container-fluid " style="height: 7vh;">
+      <div class="container text-center">
+          <a class="navbar-brand text-white m-auto" href="#"><span class=" fw-bold text-warning">M-L</span>earning</a>
+          
+      </div>
+  </nav>
+    <div class="container-fluid text-center d-flex justify-content-center align-items-center" style="height: 86vh;">
         <div class="col-md-4 d-flex align-items-center justify-content-center m-auto">
           {% block content %} {% endblock %}
         </div>
-      </div>
     </div>
+
+    <footer class="container-fluid p-0 bg-custom-blue" style="height: 7vh;">
+    </footer>
+  </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>
