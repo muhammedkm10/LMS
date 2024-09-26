@@ -1,0 +1,53 @@
+
+
+{% extends 'StudentBase.html' %}
+{% load static %}
+
+{% block title %}Courses{% endblock %}
+{% block content %}
+
+{% comment %} header section {% endcomment %}
+
+<main class="container-fluid text-center my-2 p-5 mt-2  d-md-flex justify-content-between  bg-white" id="course_section">
+    <h4 class="fw-bold">Find Your courses</h4>
+    <div>
+        <button class="btn filter-button btn-block mb-2">Latest</button>
+        <button class="btn filter-button btn-block mb-2">Beginner</button>
+        <button class="btn filter-button btn-block mb-2">Hard</button>
+        <button class="btn filter-button btn-block mb-2">Medium</button>
+    </div>
+    <div class="d-sm=flex ">
+     <input type="text" placeholder="search" class="rounded-5 py-2 border-1 text-center">
+     <button class="btn btn-primary rounded-5">search</button>
+    </div>
+      
+</main>
+
+
+
+{% comment %} couuse section  {% endcomment %}
+<main class="container text-center my-5 p-3 mt-5  bg-white" id="course_section">
+    <h2 class="text-center mb-4 p-3 ">Our Featured Courses</h2>
+    <div class="row">
+        {% for course in courses_with_teachers%}
+
+        <div class="col-md-3 mb-4">
+            <div class="card h-100 text-center">
+                <img src={% static "images/course dummy.jpeg" %} class="card-img-top" alt="Web Development">
+                <div class="card-body">
+                    <Strong class="card-title fs-5 py-3">{{course.name}}</Strong>
+                    <h5 class="card-title  ">{{course.teacher.username}}</h5>
+
+                    <p class="card-text pt-3">{{course.description}} </p>
+                    <a href="{%url "show_quiz" course.id %}?question_index=0" class="btn btn-primary">Start Quiz</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %} 
+             
+        
+    </div>
+      
+</main>
+
+{% endblock %}

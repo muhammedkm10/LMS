@@ -20,19 +20,12 @@ from django.utils import timezone
 def StudentHome(request):
     # if user went back to the home from the quiz clearing the session
     request.session.pop("quiz_answers", None)
-    courses_with_teachers = Courses.objects.select_related("teacher").all()
+    courses_with_teachers = Courses.objects.select_related("teacher").all().order_by("-id")[:4]
     email = request.session["email"]
     user = CustomUser.objects.get(email=email)
-
     # Retrieve all submission details for the user
-
-    submissions = QuizSubmissionDetails.objects.filter(student=user).select_related(
-        "course"
-    )
-
     context = {
         "courses_with_teachers": courses_with_teachers,
-        "submissions": submissions,
     }
     return render(request, "StudentHome.html", context)
 
@@ -115,3 +108,24 @@ def calculate_score(answers, questions):
         if selected_answer == question.correct_answer:
             score += 1
     return score
+
+
+# student profile fuction
+def StudentProfile(request):
+    email = request.session["email"]
+    user = CustomUser.objects.get(email=email)
+    submissions = QuizSubmissionDetails.objects.filter(student=user).select_related("course")
+    context = {
+        user:user,
+        "submissions": submissions,
+    }
+    return render(request, "Profile.html",context)
+    
+
+# show courses for users
+def CourseDetails(request):
+    courses_with_teachers = Courses.objects.select_related("teacher").all().order_by("-id")
+    context = {
+        "courses_with_teachers": courses_with_teachers,
+    }
+    return render(request, "Courses.html",context)

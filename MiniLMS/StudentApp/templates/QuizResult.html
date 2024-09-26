@@ -8,10 +8,28 @@
 </head>
 <body class="bg-light">
 
-<div class="container mt-5">
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+
+
+
+{% extends 'StudentBase.html' %}
+{% load static %}
+
+{% block title %}Quiz result{% endblock %}
+
+{% block content %}
+<div class="container d-flex justify-content-center align-items-center" style="height: 55vh;">
+<div class="container bg-light">
     <div class="card text-center shadow">
         <div class="card-header">
-            <h1 class="mb-0">Quiz Completed!</h1>
+            <h4 class="mb-0 text-success">Quiz Completed!</h4>
         </div>
         <div class="card-body">
             <h2 class="card-title">Your Score: <span class="text-primary">{{ score }} /10</span></h2>
@@ -26,14 +44,10 @@
             </div>
         </div>
         <div class="card-footer text-muted">
-            {% comment %} <a href="{% url 'show_quiz' course.id %}?question_index=0" class="btn btn-primary">Retry Quiz</a> {% endcomment %}
-            <a href="{% url 'student_home' %}" class="btn btn-secondary">Back to Home</a>
+            <a href="{% url 'student_home' %}" class="btn footer_background custom_button">Back to Home</a>
         </div>
     </div>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
-</html>
+</div>
+{% endblock %}

@@ -1,0 +1,140 @@
+{% extends 'StudentBase.html' %} {% load static %} {% block title %}Student
+Profile{% endblock %} {% block content %}
+
+
+<div class="contaner p-4">
+     <h4 class="fw-bold text-center">Your profile details</h4>
+</div>
+<div class="container bg-white p-5 mt-4">
+    <div class="row ">
+        <div class="col-lg-6 ">
+            <div class="container d-flex justify-content-center bg-white">
+                <div class="card border-0 bg-white">
+                    <div class="image d-flex flex-column justify-content-center align-items-center">
+                        <div>
+                            <img src="https://i.imgur.com/wvxPV9S.png" class="rounded-circle bg-body-secondary p-3" style="border-radius: 50%;" height="100" width="100" />
+                        </div>
+                        <span class="name mt-3 fw-bold">{{user.username}}</span>
+                        <span class="idd">{{user.email}}</span>
+                        <div class="d-flex flex-row justify-content-center align-items-center gap-2">
+                            <span class="idd1">+91 7584698566</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6  bg-white mt-5">
+            <div class="text  about-section  ">
+                <h5 class="fw-bold">About me</h5>
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sequi dolor molestias quia delectus, ad sint reprehenderit.</p>
+            </div>
+            
+            <div class=" rounded mt-4  d-flex justify-content-end">
+                <button class="btn navbar custom_button mx-2">Edit Profile</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<div class="container-fluid">
+    <h2 class=" mt-5 ">Attended Quizes</h2>
+
+    <main class="container-fluid my-4 p-3 mt-2 bg-white overflow-scroll  d-flex" id="attended">
+          {% for sub in submissions%}
+      
+          <div class="col-md-4  mx-2 mx-md-5">
+            <div class="card rounded-3 h-100 shadow custom-card border-0 shadow-lg">
+              <div class="card-body position-relative p-0">
+                <span class="position-absolute top-0 end-0 badge rounded-pill bg-white bor border-1 text-black mt-2 me-2">
+                  Score: {{sub.score}}
+                </span>
+                <div class="text-center">
+                  <i class="bi bi-mortarboard-fill display-4 text-primary"></i>
+                </div>
+                <h4 class="card-title text-center mb-4 fw-bold footer_background p-3 text-white">{{sub.course.name}}</h4>
+                <div class="d-flex align-items-center justify-content-center mb-3">
+                  <img src="{% static 'images/teacher.jpeg' %}" alt="Teacher" class="rounded-circle me-3" width="60" height="60">
+                  <div>
+                    <h6 class="mb-0">{{sub.course.teacher.username}}</h6>
+                    <small class="text-muted">Instructor</small>
+                  </div>
+                </div>
+                <p class="card-text text-center">
+                  <i class="bi bi-calendar-event me-2"></i>
+                  <strong>Enrolled: </strong>{{sub.date|date:"F d, Y"}}
+                </p>
+                
+                <p class="text-center "><strong class="text-muted">About course</strong></p>
+                 <p class="text-center">{{sub.course.description}}</p>
+              </div>
+              {% if sub.score >= 5%}
+              <div class="card-footer bg-transparent border-top-0">
+                <button  class="btn text-success w-100">Passed</button>
+              </div>
+              {%else%}
+              <div class="card-footer bg-transparent border-top-0">
+                <button class="btn text-danger w-100">Falid</button>
+              </div>
+              {%endif%}
+            </div>
+          </div>
+          {% endfor %}
+          
+      </main>
+      <h2 class=" mt-5 ">Your Courses</h2>
+      <main class="container-fluid text-center p-5 d-flex  bg-white overflow-scroll" id="attended">
+    
+                <div class="card h-100 text-center custom-card mx-2 ">
+                    <img src={% static "images/course dummy.jpeg" %} class="card-img-top" alt="Web Development">
+                    <div class="card-body">
+                        <Strong class="card-title fs-5 py-3">my course</Strong>
+                        <h5 class="card-title  ">joen duo</h5>
+    
+                        <p class="card-text pt-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
+                </div>
+            </div>
+                <div class="card h-100 text-center custom-card mx-2 ">
+                    <img src={% static "images/course dummy.jpeg" %} class="card-img-top" alt="Web Development">
+                    <div class="card-body">
+                        <Strong class="card-title fs-5 py-3">my course</Strong>
+                        <h5 class="card-title  ">joen duo</h5>
+    
+                        <p class="card-text pt-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
+                </div>
+            </div>
+                <div class="card h-100 text-center custom-card mx-2">
+                    <img src={% static "images/course dummy.jpeg" %} class="card-img-top" alt="Web Development">
+                    <div class="card-body">
+                        <Strong class="card-title fs-5 py-3">my course</Strong>
+                        <h5 class="card-title  ">joen duo</h5>
+    
+                        <p class="card-text pt-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
+                    </div>
+            </div>
+                <div class="card h-100 text-center custom-card mx-2 ">
+                    <img src={% static "images/course dummy.jpeg" %} class="card-img-top" alt="Web Development">
+                    <div class="card-body">
+                        <Strong class="card-title fs-5 py-3">my course</Strong>
+                        <h5 class="card-title  ">joen duo</h5>
+    
+                        <p class="card-text pt-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
+                    </div>
+                </div>
+            </div>
+               
+                 
+            
+        </div>
+          
+    </main>
+
+</div>
+
+
+
+{% endblock %}

@@ -1,129 +1,99 @@
+
+{% extends 'StudentBase.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>M-Learning </title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f0f8ff;
-        }
-        .navbar {
-            background-color: #4b0082;
-        }
-        .btn-primary {
-            background-color: #4b0082;
-            border-color: #4b0082;
-        }
-        .btn-primary:hover {
-            background-color: #6a5acd;
-            border-color: #6a5acd;
-        }
-    </style>
-</head>
-<body>
-    <nav class="navbar navbar-expand-lg navbar-dark">
-        <div class="container">
-            <a class="navbar-brand" href="#">M-Leaning</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto p-2">
-                    <li class="nav-item"><a class="nav-link btn bg-danger ms-2 text-white"  data-bs-toggle="modal" data-bs-target="#logout">Logout</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
 
-    <header class="container my-5 p-5">
-        <div class="row p-5">
-            <div class="col-md-6">
-                <img src="{% static 'images/homee-removebg-preview.png' %}" class="img-fluid rounded" alt="E-learning concept">
-            </div>
-            <div class="col-md-6 d-flex flex-column font-monospace align-items-center text-center">
-                    <h4>Welcome to M-Learnig</h4>
-                    <p> <strong>M-Learning</strong>  enables learners to access courses and quizzes via their mobile devices, offering flexibility and convenience. It features interactive content that enhances engagement and understanding. Each course is supplemented with quizzes to reinforce knowledge and track progress. This approach makes education accessible anytime, anywhere, catering to diverse learning styles.</p>
-                    <div class="d-flex">
-                    <a class="btn btn-info text-white mx-2" href="#course_section">Our Courses</a>
-                    <a class="btn btn-success text-white" href="#attended">You Quizes</a>
-                </div>
+{% block title %}Student Home{% endblock %}
+{% block content %}
 
-            </div>
-        </div>
-    </header>
-
-    <main class="container my-5 p-5 mt-5  bg-white" id="course_section">
-        <h2 class="text-center mb-4 font-monospace p-3 ">Our Featured Courses</h2>
-        <div class="row">
-            {% for course in courses_with_teachers%}
-
-            <div class="col-md-4 mb-4">
-                <div class="card h-100 text-center">
-                    <img src={% static "images/course dummy.jpeg" %} class="card-img-top" alt="Web Development">
-                    <div class="card-body">
-                        <Strong class="card-title fs-5 py-3">{{course.name}}</Strong>
-                        <h5 class="card-title  ">{{course.teacher.username}}</h5>
-
-                        <p class="card-text pt-3">{{course.description}} </p>
-                        <a href="{%url "show_quiz" course.id %}?question_index=0" class="btn btn-primary">Start Quiz</a>
-                    </div>
-                </div>
-            </div>
-            {% endfor %} 
-
-            
-        </div>
-    </main>
-
-    <main class="container my-5 p-5 mt-5  bg-white" id="attended">
-        <h2 class="text-center mb-4 font-monospace p-3 ">Attended Quizes</h2>
-        <div class="row">
-            {% for sub in submissions%}
-
-            <div class="col-md-4 mb-4">
-                <div class="card h-100 text-center">
-                    <div class="card-body">
-                        <Strong class="card-title fs-5 py-3">{{sub.course.name}}</Strong>
-                        <h5 class="card-title  ">{{sub.course.teacher.username}}</h5>
-                        <p class="card-text pt-3">Date : {{sub.date}} </p>
-                        <p class="card-text pt-3">Your Score : {{sub.score}} </p>
-                    </div>
-                </div>
-            </div>
-            {% endfor %} 
-
-            
-        </div>
-    </main>
-
-    <footer class="navbar text-white text-center py-3">
-        <h6 class="text-center m-auto">&copy; 2024 LearnSmart. All rights reserved.</h6>
-    </footer>
-
-    <!-- Logout Modal -->
-    <div class="modal fade" id="logout" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="logoutModalLabel">Confirm Logout</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    Are you sure you want to logout?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <a  href="{% url "logout" %}" type="button" class="btn btn-danger" id="confirm-delete-btn">Logout</a>
-
-                </div>
-            </div>
+{% comment %} header section {% endcomment %}
+<header class="container-fluid   header-container"  style="background-image: url('{% static "images/poo.png" %}'); background-position: center; background-repeat: no-repeat; background-size: cover; height: 85vh;">
+    <div class="row ">
+        <div class="col-md-6  d-none d-md-inline ps-2" style="background-image: url('{% static "images/pppp.jpg" %}'); background-position: center; background-repeat: no-repeat; background-size: cover; height: 85vh;">
+        </div> 
+        <div class="col-md-6 d-flex flex-column align-items-center justify-content-center m-auto  header_inner  slide-in ">
+            <h3 class="fw-bolder text-center headeer-font">Learn on you'r schedule.</h3>
+            <p class="fs-6 text-center mx-5 header-para"><strong>M-Learning</strong> offers flexible access to interactive courses and quizzes on mobile devices, enhancing engagement and understanding while catering to diverse learning styles anytime, anywhere.</p>
+            <a class="btn navbar custom_button   mx-2" href="#course_section">Explor more</a>
         </div>
     </div>
+</header>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+{% comment %} why us section  {% endcomment %}
+
+<main class="container mt-3 why_us   p-3 "  id="why_us">
+            <div class="row p-4">
+                <div class="col-md-3 ">
+                    <h2 class="pt-sans-bold ">Why Choose Us</h2>
+                    <p class="para-font">Build your brighter future with us.</p>
+                </div>
+                <div class="col-md-3 py-2 d-flex">
+                    <i class="fas fa-book-open fs-1 "></i>
+                    <div class="">
+                    <h6 class="px-3  simple_font"> Best Learning</h6>
+                    <p class="px-3 para-font">Build your brighter future.</p>
+                </div>
+                </div>
+                <div class="col-md-3 py-2 d-flex">
+                    <i class="fas fa-user-tie fs-1"></i>
+                    <div>
+                    <h6 class="px-3  simple_font"> Mentor Support</h6>
+                    <p class="px-3 para-font">Build your brighter future.</p>
+                </div>
+                </div>
+                <div class="col-md-3 py-2 d-flex">
+                    <i class="fas fa-laptop-house fs-1"></i>
+                    <div>
+                    <h6 class="px-3  simple_font"> Advanced Facilities</h6>
+                    <p class="px-3 para-font">Build your brighter future.</p>
+                </div>
+                </div>
+            </div>
+
+</main>
+
+{% comment %} content about the site {% endcomment %}
+
+<main class="container-fluid my-5 p-5 mt-5  bg-white d-flex flex-column align-items-center justify-content-center" id="about_us">
+    <h2 class="text-center mb-4  p-3   pt-sans-bold">M-Learning</h2>
+    <p class="p-2 text-center about-section ">
+        <strong>M-learning</strong> is an innovative online learning platform designed to
+        revolutionize education. Our mission is to bridge the gap between
+        traditional classroom teaching and modern digital education. Whether
+        you're a teacher looking to enhance your teaching methods or a student
+        seeking personalized learning experiences, <strong>M-learning</strong> has something for
+        everyone. Our platform offers interactive lessons tailored to individual
+        student needs, real-time feedback and progress tracking, access to a
+        vast library of educational resources, and collaborative tools for group
+        projects and discussions. Ready to experience the future of education!
+      
+      </p>
+</main>
+
+
+{% comment %} couuse section  {% endcomment %}
+<main class="container text-center my-5 p-5 mt-5  bg-white" id="course_section">
+    <h2 class="text-center mb-4 p-3 ">Our Latest Courses</h2>
+    <div class="row">
+        {% for course in courses_with_teachers%}
+
+        <div class="col-md-3 mb-4">
+            <div class="card h-100 text-center">
+                <img src={% static "images/course dummy.jpeg" %} class="card-img-top" alt="Web Development">
+                <div class="card-body">
+                    <Strong class="card-title fs-5 py-3">{{course.name}}</Strong>
+                    <h5 class="card-title  ">{{course.teacher.username}}</h5>
+
+                    <p class="card-text pt-3">{{course.description}} </p>
+                    <a href="{%url "show_quiz" course.id %}?question_index=0" class="btn btn-info text-white">Start Quiz</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %} 
+             
+        
+    </div>
+<a class="btn footer_background custom_button"   href="/show_courses ">Explore more</a>
+      
+</main>
+
+{% endblock %}

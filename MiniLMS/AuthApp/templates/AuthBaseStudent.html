@@ -14,48 +14,56 @@
       body,
       html {
         height: 100%;
-      }
-      .bg-custom-blue {
-        background-color: #1a73e8;
+        margin: 0 !important;
+        padding: 0 !important;
+        overflow:hidden;
       }
       .login-container {
-        min-height: 100vh;
+        min-height: 80vh;
       }
       .image-collage {
-        width: 80%;
-        max-width: 400px;
+        width: 100%;
+        height: 68vh;
       }
+      .form-control::placeholder { 
+        opacity: 1; 
+        text-align: center;
+    }
+    .bg-navbar {
+      background-color: #330551;
+   }
+   .hover-custome:hover{
+      background-color: blueviolet;
+   }
+   .auth-section{
+       min-width: 400px;
+   }
     </style>
   </head>
   <body>
-    <div class="container-fluid">
-      <div class="row login-container">
+    <div class="container-fluid p-0 m-0"  style="width: 100vw;" >
+      <div class="container-fluid p-0 ms-0 navbar bg-navbar " style="height: 10vh;"><h3 class="m-auto fs-4"><span class=" fw-bold text-warning">M-L</span><span class="text-white" >earning</span></h3></div>
+      <div class="row p-0 m-0 login-container">
         <div
-          class="col-md-6 bg-custom-blue d-flex flex-column justify-content-between align-items-center text-white p-5"
-        >
+          class="col-lg-6 d-none d-lg-flex  flex-column justify-content-center align-items-center first-part " style="height: 85vh;">
           <div class="text-start w-100">
-            <h3>M-Learning</h3>
           </div>
           <div class="text-center">
             <img
-              src={% static 'images/login.jpeg' %}
+              src={% static 'images/man with lap.png' %}
               alt="Image Collage"
               class="img-fluid rounded image-collage"
             />
           </div>
-          <div class="w-100 d-flex justify-content-center">
-            {% comment %} <a href="#" class="text-white mx-2">Facebook</a> {%
-            endcomment %} {% comment %}
-            <a href="#" class="text-white mx-2">Twitter</a> {% endcomment %}
-            {%comment %} <a href="#" class="text-white mx-2">LinkedIn</a> {% endcomment %}
-          </div>
+          
         </div>
-        <div class="col-md-6 d-flex align-items-center justify-content-center">
+        <div class="col-lg-6 col-12 d-flex align-items-center justify-content-center p-0 m-0 auth-section"  style="height: 85vh;">
           {% block content %} {% endblock %}
         </div>
       </div>
     </div>
+    <div class="container-fluid p-0 ms-0 navbar bg-navbar " style="height: 5vh;"></div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>
-1
