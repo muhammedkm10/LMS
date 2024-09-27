@@ -30,7 +30,6 @@ def TeacherHome(request):
 
 
 def AddCourse(request):
-    print("i am working yoo")
     if request.method == "POST":
         form = AddCouseForm(data=request.POST)
         email = request.session["email"]
@@ -54,7 +53,6 @@ def AddCourse(request):
             messages.success(request, "Your course added succesfully..")
             return redirect("teacher_home")
         else:
-            print(form.errors)
             messages.error(
                 request, "Select name or The  description should contain 10 letters"
             )
@@ -63,7 +61,6 @@ def AddCourse(request):
 
 # edit course function
 def EditCourse(request, id):
-    print(id)
     if request.method == "POST":
         form = EditCouseForm(data=request.POST)
         email = request.session["email"]
@@ -83,7 +80,6 @@ def EditCourse(request, id):
             messages.success(request, "Your course updated succesfully..")
             return redirect("teacher_home")
         else:
-            print(form.errors)
             messages.error(
                 request, "Select name or The  description should contain 10 letters"
             )
@@ -133,8 +129,6 @@ def ShowQuiz(request, course_id):
     submissions = QuizSubmissionDetails.objects.filter(course=course).select_related(
         "student"
     )
-    print(submissions)
-
     context = {"course": course, "quizzes": quizzes, "submissions": submissions}
     return render(request, "ShowQuizToTeacher.html", context)
 
